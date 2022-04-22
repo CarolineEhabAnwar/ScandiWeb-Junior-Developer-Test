@@ -1,7 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useQuery, gql } from "@apollo/client";
 
 function App() {
+  const EXCHANGE_RATES = gql`
+    query getExchangeRates {
+      category {
+        name
+        products {
+          name
+          brand
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  console.log(data);
+
   return (
     <div className="App">
       <header className="App-header">
